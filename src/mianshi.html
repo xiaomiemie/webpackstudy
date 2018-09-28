@@ -1,0 +1,50 @@
+<html>
+    <head></head>
+    <body>
+        <p>可以联想：我，我们，我们是</p>
+        <input id="input">
+        <p id="res"></p>
+    </body>
+    <script>
+        function AutoComp (tag, restag, data, time) {
+            // 一些字段检查略
+
+            function findKey (str, data) {
+                let res = data.filter((item, index)=>{
+                    return item.indexOf(str) > -1;
+                });
+                return res;
+            }
+
+            function _jieliu (cb, time) {
+                let timer = null;
+                return function (e) {
+                    clearTimeout(timer);
+                    timer = null;
+                    timer = setTimeout(()=>{
+                        cb(e);
+                    }, time);
+                }
+            }
+            let res = _jieliu(function (e) {
+                let val = e.target.value;
+                if (val.length === 0) {
+                    restag.innerHTML = '';
+                    return;
+                }
+                let resArr = findKey(e.target.value, data);
+                if (resArr.length !== 0) {
+                    restag.innerHTML = resArr.join(',');
+                } else {
+                    restag.innerHTML = '';
+                }
+            }, time);
+
+            tag.addEventListener('keyup', function(e) {
+                 res(e);
+            });
+        }
+
+        AutoComp(document.getElementById('input'), document.getElementById('res'), ['我','我们','我们是'],  800);
+    </script>
+</html>

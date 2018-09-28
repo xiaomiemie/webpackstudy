@@ -1,0 +1,18 @@
+.first-box{
+    width: 100px;
+    height: 200px;
+    background: red;
+    float: left;
+}
+.second-box {
+    width: 100px;
+    background: green;
+    height: 200px;
+    float: left;
+    z-index:2;
+}
+.thrid {
+    width: 300px;
+    background: pink;
+    height: 300px;
+}
